@@ -43,4 +43,22 @@ fetch(SHEET_CSV_URL)
     const [date, num,, prize] = r.split(",");
     if (!date ||!prize ||!num) return;
     if (!data[date]) data[date] = {};
-    if (!data[date][prize]) data[date]
+    if (!data[date][prize]) data[date][prize] = [];
+    data[date][prize].push(num.trim());
+  });
+  const latestDate = Object.keys(data).sort().reverse()[0];
+  document.getElementById('date').innerText = 'နေ့စွဲ: ' + latestDate;
+  const wrap = document.getElementById('results'); wrap.innerHTML = '';
+  
+  prizeOrder.forEach(prize => {
+    if (!data[latestDate][prize]) return;
+    const box = document.createElement('div'); 
+    box.className = `box ${prizeClass[prize]}`;
+    box.innerHTML = `<h2>${prize} သိန်းပေါင်း</h2><div class="numbers ${gridClass[prize]}">${data[latestDate][prize].map(n => `<span>${n}</span>`).join('')}</div>`;
+    wrap.appendChild(box);
+  });
+})
+.catch(() => document.getElementById('loading').innerText = "Internet ချိတ်ဆက်မှု စစ်ဆေးပါ");
+</script>
+</body>
+</html>
