@@ -1,6 +1,46 @@
-    <h1>🎰 Arakan Lotto</h1>
-    <p>Website အသင့်တင့် Bro 🔥</p>
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Arakan Lotto</title>
+<style>
+body { margin: 0; font-family: 'Pyidaungsu', sans-serif; background: #f0f2f5; padding: 10px; }
+header { text-align: center; background: var(--blue); color: #fff; padding: 10px; border-radius: 12px; margin-bottom: 15px; }
+header h1 { margin: 0; font-size: 20px; }
+.box { border-radius: 16px; padding: 12px; margin-bottom: 12px; color: #000; }
+.box h2 { margin: 0 0 10px 0; font-size: 16px; color: #fff; display: inline-block; padding: 5px 14px; border-radius: 8px; }
+.numbers { display: grid; gap: 8px; font-size: 18px; font-weight: bold; text-align: center; }
+.numbers span { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+/* အရောင်ခွဲမယ် */
+.p1 { background: linear-gradient(90deg, #fde047, #facc15); }.p1 h2 { background: #4f46e5; } /* ပထမဆု - ဝါ */
+.p2 { background: linear-gradient(90deg, #fb923c, #f97316); }.p2 h2 { background: #059669; } /* ဒုတိယဆု - လိမ္မော် */
+.p3 { background: linear-gradient(90deg, #7dd3fc, #38bdf8); }.p3 h2 { background: #0ea5e9; } /* တတိယဆု - ပြာ */
+.p4 { background: linear-gradient(90deg, #fca5a5, #ef4444); }.p4 h2 { background: #dc2626; } /* စတုတ္ထဆု - နီ */
+.p5 { background: linear-gradient(90deg, #d1d5db, #a3a3a3); }.p5 h2 { background: #4b5563; } /* ပဉ္စမဆု - ပြာ */
+.p6 { background: linear-gradient(90deg, #a7f3d0, #10b981); }.p6 h2 { background: #065f46; } /* ဆုကြီး - အစိမ်း */
+.n3 { grid-template-columns: repeat(3, 1fr); } /* 3 ခါ */
+.n4 { grid-template-columns: repeat(4, 1fr); font-size: 16px; } /* 4 ခါ */
+#loading { text-align: center; padding: 50px; color: #64748b; }
+</style>
+</head>
+<body>
+<header><h1>🎰 အာရက္ခလောင်းပေါက်ပဲမင်း</h1><p id="date"></p></header>
+<main id="results"><div id="loading">Loading...</div></main>
+<script>
+const SHEET_CSV_URL = "PASTE_YOUR_CSV_LINK_HERE"; // <-- ဒီနေရာမှာ Link ကပ်ထား
 
-    <script src="script.js"></script>
-    </body>
-    </html>
+const prizeOrder = ['ပထမဆု','ဒုတိယဆု','တတိယဆု','စတုတ္ထဆု','ပဉ္စမဆု','ဆုကြီး'];
+const prizeClass = {'ပထမဆု':'p1','ဒုတိယဆု':'p2','တတိယဆု':'p3','စတုတ္ထဆု':'p4','ပဉ္စမဆု':'p5','ဆုကြီး':'p6'};
+const gridClass = {'ပထမဆု':'n3','ဒုတိယဆု':'n3','တတိယဆု':'n3','စတုတ္ထဆု':'n3','ပဉ္စမဆု':'n3','ဆုကြီး':'n4'};
+
+fetch(SHEET_CSV_URL)
+.then(res => res.text())
+.then(csv => {
+  const rows = csv.split("\n").slice(1);
+  const data = {};
+  rows.forEach(r => {
+    const [date, num,, prize] = r.split(",");
+    if (!date ||!prize ||!num) return;
+    if (!data[date]) data[date] = {};
+    if (!data[date][prize]) data[date]
