@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arakan Lotto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🎰 Arakan Lotto</h1>
+  <p>Website အသင့်တင်ပြီ Bro 🔥</p>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: sans-serif;
+  background: #1a1a1a;
+  color: #fff;
+  text-align: center;
+  padding-top: 50px;
+}
+h1 {
+  color: gold;
+}
+console.log("Arakan Lotto Loaded 🔥");
+alert("Website တက်ပြီ Bro!");
